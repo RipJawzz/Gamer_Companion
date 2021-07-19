@@ -1,0 +1,28 @@
+import 'package:game_companion/data_and_models/game.dart';
+
+game g1=game(name: 'Assassins Creed Valhalla ',imageUrl: 'assets/images/AC_Valhalla.png',code: 1);
+game g2=game(name: 'Alien Isolation',imageUrl: 'assets/images/Alien_Isolation.png',code: 2);
+game g3=game(name: 'Battlefield 1',imageUrl: 'assets/images/Battlefield_1.png',code: 3);
+game g4=game(name: 'Control',imageUrl: 'assets/images/Control.png',code: 4);
+game g5=game(name: 'Dead Space',imageUrl: 'assets/images/Dead_Space.png',code: 5);
+game g6=game(name: 'Doom Eternal',imageUrl: 'assets/images/Doom_Eternal.png',code: 6);
+game g7=game(name: 'Gears Of War 5',imageUrl: 'assets/images/GOW_5.png',code: 7);
+game g8=game(name: 'Mortal Combat 11',imageUrl: 'assets/images/MK.png',code: 8);
+game g9=game(name: 'Counter Strike GO',imageUrl: 'assets/images/CSGO.png',code: 9);
+game g10=game(name: 'Cyberpunk',imageUrl: 'assets/images/Cyberpunk.png',code: 10);
+game g11=game(name: 'Doom',imageUrl: 'assets/images/Doom.png',code: 11);
+game g12=game(name: 'Forza Horizon 4',imageUrl: 'assets/images/FH4.png',code: 12);
+game g13=game(name: 'Forza Horizon 3',imageUrl: 'assets/images/FH3.png',code: 13);
+game g14=game(name: 'The Witcher 3',imageUrl: 'assets/images/The_Witcher_3.png',code: 14);
+game g15=game(name: 'Skyrim',imageUrl: 'assets/images/TESSkyrim.png',code: 15);
+game g16=game(name: 'Shadow of the Tomb raider',imageUrl: 'assets/images/SOTTR.png',code: 16);
+game g17=game(name: 'Rocket League',imageUrl: 'assets/images/Rocket_League.png',code: 17);
+game g18=game(name: 'Hellblade',imageUrl: 'assets/images/Hellblade.png',code: 18);
+game g19=game(name: 'Grand Theft Auto V',imageUrl: 'assets/images/GTAV.png',code: 19);
+game g20=game(name: 'Call Of Duty Warzone',imageUrl: 'assets/images/COD_Warzone.png',code: 20);
+game g21=game(name: 'Valorant',imageUrl: 'assets/images/Valorant.png',code: 21);
+List<game> all_games= [g1,g2,g3,g4,g5,g6,g7,g8,g9,g10,g11,g12,g13,g14,g15,g16,g17,g18,g19,g20,g21];
+List<game> all_games_alphabetically=[];
+List<game> favourites=[];
+List<game> sortedLikes=[];
+int nP=0;

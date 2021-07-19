@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "889307900492",
+    "project_id": "firstfirebase-19a17",
+    "storage_bucket": "firstfirebase-19a17.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:889307900492:android:91dcd4263142820657e2e9",
+        "android_client_info": {
+          "package_name": "com.cooltrial.brew_crew"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "889307900492-thfq0bam38a7h8c6fdtt5n5h4qm55fde.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC0m5NNWSftf84_RGGjau7-hZYMXVab8aM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "889307900492-thfq0bam38a7h8c6fdtt5n5h4qm55fde.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:889307900492:android:a9f2399bd2ddfed757e2e9",
+        "android_client_info": {
+          "package_name": "com.example.game_companion"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "889307900492-thfq0bam38a7h8c6fdtt5n5h4qm55fde.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC0m5NNWSftf84_RGGjau7-hZYMXVab8aM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "889307900492-thfq0bam38a7h8c6fdtt5n5h4qm55fde.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
