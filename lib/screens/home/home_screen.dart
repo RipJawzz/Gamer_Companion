@@ -8,6 +8,7 @@ import 'package:game_companion/services/auth.dart';
 import 'package:game_companion/shared/loading.dart';
 import 'package:provider/provider.dart';
 import 'package:game_companion/services/database.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HomeScreen extends StatefulWidget {
   final title;
@@ -25,14 +26,86 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     final user = Provider.of<User>(context);
 
+    Future<void> _launch(String url) async {
+      try {
+        launch(url);
+      } catch (e) {
+        print("Launch failed");
+      }
+    }
+
+    void _showDevDetails(String name) {
+      showModalBottomSheet(
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+          context: context,
+          builder: (context) {
+            return Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                SizedBox(
+                  height: 20,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    SizedBox(width: 20,),
+                    Text(
+                      "Made by : Ishan Acharyya",
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    SizedBox(width: 20,),
+                    IconButton(
+                      onPressed: () => _launch("https://github.com/RipJawzz"),
+                      icon: Image(
+                        image: AssetImage("assets/others/github.png"),
+                      ),
+                      iconSize: 50,
+                    ),
+                    SizedBox(width: 15,),
+                    IconButton(
+                      onPressed: () => _launch(
+                          "https://www.linkedin.com/in/ishan-acharyya-297222191/"),
+                      icon: Image(
+                        image: AssetImage("assets/others/linkedin.png"),
+                      ),
+                      iconSize: 30,
+                    ),
+                  ],
+                ),
+                SizedBox(height: 20,),
+                Row(
+                  children: [
+                    SizedBox(width: 20,),
+                    Icon(Icons.email,size: 30,),
+                    Text("ishanacharyya6@gmail.com",
+                    style: TextStyle(fontSize: 20,fontWeight: FontWeight.w600),),
+                  ],
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+              ],
+            );
+          });
+    }
+
     void _showSettingsPanel(String name) {
       game? curr;
-      if(nP!=0)
-        curr=all_games[nP-1];
+      if (nP != 0) curr = all_games[nP - 1];
       showModalBottomSheet(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10)
-        ),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
           context: context,
           builder: (context) {
             return Column(
@@ -49,7 +122,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       size: 30,
                       color: Theme.of(context).primaryColor,
                     ),
-                    SizedBox(width: 30,),
+                    SizedBox(
+                      width: 30,
+                    ),
                     Text(
                       name,
                       style:
@@ -64,29 +139,52 @@ class _HomeScreenState extends State<HomeScreen> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Text('Playing now:',
-                    style: TextStyle(
-                      fontSize: 20, fontWeight: FontWeight.bold
-                    ),),
-                    SizedBox(height: 5,),
-                    if(curr==null)Text('Not playing any',style: TextStyle(
-                        fontSize: 20, fontWeight: FontWeight.bold
-                    ),),
-                    if(curr!=null)Text(curr.name,style: TextStyle(
-                        fontSize: 20, fontWeight: FontWeight.bold
-                    ),),
-                    if(curr!=null)ClipRRect(
-                      borderRadius: BorderRadius.circular(10),
-                      child: Image(
-                        image: AssetImage(curr.imageUrl),
-                      ),
+                    Text(
+                      'Playing now:',
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     ),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    if (curr == null)
+                      Text(
+                        'Not playing any',
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
+                      ),
+                    if (curr != null)
+                      Text(
+                        curr.name,
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
+                      ),
+                    if (curr != null)
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: Image(
+                          image: AssetImage(curr.imageUrl),
+                        ),
+                      ),
                   ],
-
                 ),
               ],
             );
           });
+    }
+
+    void onSelected(BuildContext context, int item,String name) async{
+      switch (item) {
+        case 0:
+          await _auth.signOut();
+          break;
+        case 1:
+          _showSettingsPanel(name);
+          break;
+        case 2:
+          _showDevDetails(name);
+          break;
+      }
     }
 
     return StreamBuilder<UserData>(
@@ -111,22 +209,71 @@ class _HomeScreenState extends State<HomeScreen> {
                 title: Text(
                   widget.title,
                   style: TextStyle(
-                    fontSize: 20.0,
+                    fontSize: 35.0,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                actions: <Widget>[
-                  TextButton.icon(
-                    icon: Icon(Icons.person),
+                /*actions: <Widget>[
+                  IconButton(
+                    icon: Icon(Icons.logout),
                     onPressed: () async {
                       await _auth.signOut();
                     },
-                    label: Text('Logout'),
+                    iconSize: 20,
+                    color: Theme.of(context).backgroundColor,
                   ),
-                  TextButton.icon(
+                  IconButton(
                       onPressed: () => _showSettingsPanel(userData.name),
                       icon: Icon(Icons.visibility),
-                      label: Text('U'))
+                    iconSize: 20,
+                    color: Theme.of(context).backgroundColor,
+                  ),
+                  IconButton(
+                    onPressed: () => _showDevDetails(userData.name),
+                    icon: Icon(Icons.info_outline),
+                    iconSize: 20,
+                    color: Theme.of(context).backgroundColor,
+                  )
+                ],*/
+                actions: [
+                  Theme(
+                    data: Theme.of(context).copyWith(
+                      dividerColor: Colors.white,
+                      iconTheme: IconThemeData(color: Colors.blue,size: 30),
+                      textTheme: TextTheme().apply(bodyColor: Colors.blue)
+                    ),
+                    child: PopupMenuButton<int>(
+                      color: Theme.of(context).primaryColor,
+                      onSelected: (item) => onSelected(context, item,userData.name),
+                      itemBuilder: (context) => [
+                        PopupMenuItem<int>(
+                          value: 0,
+                          child: TextButton.icon(
+                            icon: Icon(Icons.logout,),
+                            onPressed: () {  },
+                            label: Text("Logout"),
+                          )
+                        ),
+                        PopupMenuItem<int>(
+                          value: 1,
+                            child: TextButton.icon(
+                              icon: Icon(Icons.visibility,),
+                              onPressed: () {  },
+                              label: Text("U"),
+                            )
+                        ),
+                        PopupMenuDivider(),
+                        PopupMenuItem<int>(
+                          value: 2,
+                            child: TextButton.icon(
+                              icon: Icon(Icons.info,),
+                              onPressed: () {  },
+                              label: Text("About"),
+                            )
+                        ),
+                      ],
+                    ),
+                  ),
                 ],
               ),
               body: Column(
@@ -141,7 +288,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         for (int i = 0; i < favourites.length; i++)
                           s = s + ',' + favourites[i].code.toString();
                         await DatabaseService(uid: user.uid)
-                            .updateUserData(s, userData.name,nP);
+                            .updateUserData(s, userData.name, nP);
                       },
                       child: Text('Update'))
                 ],
