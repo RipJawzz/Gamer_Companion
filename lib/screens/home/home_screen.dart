@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:game_companion/Widgets/categories.dart';
@@ -34,7 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
       }
     }
 
-    void _showDevDetails(String name) {
+    void _showDevDetails() {
       showModalBottomSheet(
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
@@ -182,7 +183,7 @@ class _HomeScreenState extends State<HomeScreen> {
           _showSettingsPanel(name);
           break;
         case 2:
-          _showDevDetails(name);
+          _showDevDetails();
           break;
       }
     }
@@ -250,7 +251,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           value: 0,
                           child: TextButton.icon(
                             icon: Icon(Icons.logout,),
-                            onPressed: () {  },
+                            onPressed: () async {await _auth.signOut();},
                             label: Text("Logout"),
                           )
                         ),
@@ -258,7 +259,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           value: 1,
                             child: TextButton.icon(
                               icon: Icon(Icons.visibility,),
-                              onPressed: () {  },
+                              onPressed: () {_showSettingsPanel(userData.name);},
                               label: Text("U"),
                             )
                         ),
@@ -267,7 +268,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           value: 2,
                             child: TextButton.icon(
                               icon: Icon(Icons.info,),
-                              onPressed: () {  },
+                              onPressed: () {_showDevDetails();},
                               label: Text("About"),
                             )
                         ),
