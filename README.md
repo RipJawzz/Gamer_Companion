@@ -3,7 +3,7 @@ A social app centered around gamers
 Made using Flutter, Firebase  
 
 **Installing with [APK](https://drive.google.com/file/d/1WaXHkoFYqeqQpIYtmZJW5XM1bvgUhwwx/view?usp=sharing)**  
-The apk file provided can be used to install the app on an android(IOS build on the way) by executing it in the target device (Some installation permission need to be granted).
+The apk file provided can be used to install the app on an android(IOS build on the way) by executing it in the target device (Some installation permission needs to be granted).
 
 **Running the source code**
 
